@@ -39,23 +39,26 @@ class Autoencoder(nn.Module):
     def forward(self, x):
         recon = self.autoencoder(x)
         return recon
+    def half_forward(self, x):
+        return nn.Sequential(*list(self.autoencoder)[:7])(x)
 
 
 
 if __name__ == "__main__":
-    extended_latent_dim = 16
+    extended_latent_dim = 32
     model = Autoencoder(extended_latent_dim=extended_latent_dim)
     optimizer = optim.Adam(model.parameters(), lr=1e-3)
     criterion = nn.MSELoss()
+    cross_entropy = nn.CrossEntropyLoss()
     paths = None
-    criterion_term = 0.7
-    entropy_term = 0.3
-
+    criterion_term = 1.0
+    entropy_term = 0.5
+    cross_entropy_term = 1.0
 
     # === 3. Training ===
-    for epoch in range(10):
+    for epoch in range(50):
         doprint = True
-        for batch, _ in loader:
+        for batch, labels in loader:
             optimizer.zero_grad()
 
 
@@ -72,14 +75,24 @@ if __name__ == "__main__":
             B = linear_layers[2].bias
             eloss = entropic_loss(W_l, W_r, B, alpha=1.0, beta = 0.04) # Achieved optimal results with alpha = 1.0, beta = 0.04
 
+            # Cross Entropy
+            classification = model.half_forward(batch)[:,:10]
+            classification_loss = cross_entropy(classification, labels) #TODO: Not making the latent space predictible yet. Needs more work.
+
+            # Scarcity Loss
+            l_1 = torch.tensor(0.0)
+            for weight in weight_list:
+                l_1 += torch.norm(weight, p=1)
+
+            # Reconstruction Loss
             recon = model(batch)
             criterion_loss = criterion(recon, batch)
-            loss = criterion_term * criterion_loss + entropy_term * eloss # Entire Loss Function
+            loss = criterion_term * criterion_loss + entropy_term * eloss + cross_entropy_term * classification_loss # Entire Loss Function
             loss.backward()
             optimizer.step()
             doprint = False
 
-        print(f"Epoch {epoch+1}: Loss = {loss.item():.6f}, Entropy Loss = {eloss.item():.6f}, Criterion Loss = {criterion_loss.item():.6f}")
+        print(f"Epoch {epoch+1}: Loss = {loss.item():.6f}, Entropy Loss = {eloss.item():.6f}, Criterion Loss = {criterion_loss.item():.6f}, Cross Entropy Loss = {classification_loss.item():.6f}")
 
         print([torch.max(weight).item() for weight in weight_list]) # Print max weight of each layer (debugging)
 
@@ -109,8 +122,8 @@ if __name__ == "__main__":
 
 
     split_idx = 7           # Specified here, but could be dynamically determined
-    encoder = nn.Sequential(*list(model.autoencoder)[:7])
-    decoder = nn.Sequential(*list(model.autoencoder)[7:])
+    encoder = nn.Sequential(*list(model.autoencoder)[:split_idx])
+    decoder = nn.Sequential(*list(model.autoencoder)[split_idx:])
 
 
     # Usage example

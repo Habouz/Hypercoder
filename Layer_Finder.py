@@ -26,7 +26,9 @@ def count_effective_nodes(W, b = None, threshold=1e-3):
 
     # A neuron is effective if it has any large weight or bias
     effective = (weights_abs >= threshold).any(axis=1) | (biases_abs >= threshold)
-    return int(effective.sum())
+    effective_indices = np.where(effective)[0]  # Indices of effective nodes
+    print(f"Effective node indices: {effective_indices}") if __name__ == "__main__" else None
+    return int(effective.sum()), effective_indices
 
 
 def find_layer_with_least_effective(layers, threshold=-1):
@@ -35,7 +37,8 @@ def find_layer_with_least_effective(layers, threshold=-1):
 
     Parameters
     ----------
-    layers : list of tuple
+    layers : list of tupl
+
         Each element is (W, b) for a layer, where W is the weight matrix
         and b is the bias vector (both numpy arrays).
     threshold : float
@@ -52,13 +55,16 @@ def find_layer_with_least_effective(layers, threshold=-1):
         max_thres = max([max(np.abs(W).max(), np.abs(b).max()) if b is not None else np.abs(W).max() for W, b in layers])
         threshold = max_thres * 0.01
     counts = []
+    effective_indices = []
     for idx, (W,b) in enumerate(layers):
-        cnt = count_effective_nodes(W,b,threshold)
+        cnt, eff = count_effective_nodes(W,b,threshold)
         counts.append(cnt)
+        effective_indices.append(eff)
         print(f"Layer {idx}: {cnt} effective nodes") if __name__ == "__main__" else None
 
     min_count = min(counts)
     min_idx = counts.index(min_count)
+    eff = effective_indices[min_idx]
     print(f"Layer {min_idx} has the least effective nodes: {min_count}", end = '\n') if __name__ == "__main__" else None
 
-    return min_idx, min_count, threshold
+    return min_idx, min_count, threshold, eff
