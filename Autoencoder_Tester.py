@@ -24,7 +24,7 @@ mnist = datasets.MNIST(root='./data', train=True, download=True, transform=trans
 loader = torch.utils.data.DataLoader(mnist, batch_size=256, shuffle=True)
 
 for img_batch, label_batch in loader:
-    idx = (label_batch == 8).nonzero(as_tuple=True)[0]
+    idx = (label_batch == 9).nonzero(as_tuple=True)[0]
     if len(idx) > 0:
         img = img_batch[idx[0]].unsqueeze(0)
         break
@@ -33,6 +33,7 @@ for img_batch, label_batch in loader:
 with torch.no_grad():
     latent = encoder(img)
     print("Latent representation shape:", latent.shape)
+    print(latent)
     recon = decoder(latent)
 
 # === 3. Visualize the Original and Reconstructed Images ===
