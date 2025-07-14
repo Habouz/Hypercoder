@@ -249,7 +249,7 @@ We train for 20 epochs using Adam optimizer. At each batch:
 In this setup, we were able to reduce the latent space size to 10 neurons. 
 
 \subsection{Reconstruction Quality (Compactifier)}
-\begin{figure}[h!]
+\begin{figure}[ht]
     \centering
     \includegraphics[width=0.4\textwidth]{recon_example.png}
     \caption{Sample reconstructed digits after training.}
@@ -267,7 +267,7 @@ Which, even though is of size 16, we use less than 10 neurons to encode it. The 
 \subsection{Latent Space Analysis (Compactifier)}
 To analyze what each neuron in the latent space does, we send to the decoder a tensor full of zeros except at a single neuron where we vary the value from -3 to 3. The decoder will then reconstruct the image, and we can see how each neuron affects the output.
 
-\begin{figure}[h!]
+\begin{figure}[ht]
     \centering
     \includegraphics[width=1\textwidth]{latent_analyse.png}
     \caption{Sample reconstructed latent space after training.}
@@ -291,7 +291,7 @@ Layer 6: 784 effective nodes
 
 In this case, we were too extreme by reducing it to 4 neurons. Nevertheless, let us do the analysis of it.
 
-\begin{figure}[h!]
+\begin{figure}[ht]
     \centering
     \includegraphics[width=0.4\textwidth]{recon_example_path.png}
     \caption{Sample reconstructed digits after path entropy training.}
@@ -299,7 +299,7 @@ In this case, we were too extreme by reducing it to 4 neurons. Nevertheless, let
 
 Things like 0, are encoded very well, but things like, 9, are encoded poorly.
 
-\begin{figure}[h!]
+\begin{figure}[ht]
     \centering
     \includegraphics[width=0.4\textwidth]{recon_example_path_failed.png}
     \caption{Failed reconstructed digits after path entropy training.}
@@ -307,11 +307,20 @@ Things like 0, are encoded very well, but things like, 9, are encoded poorly.
 
 To do the same analysis of the latent space as before, we send to the decoder a tensor full of zeros except at a single neuron where we vary the value from -3 to 3. The decoder will then reconstruct the image, and we can see how each neuron affects the output.
 
-\begin{figure}[h!]
+\begin{figure}[ht]
     \centering
     \includegraphics[width=1\textwidth]{latent_analyse_path.png}
     \caption{Sample reconstructed latent space after path entropy training.}
 \end{figure}
+
+\section{Adding Interpretability of Latent Space}
+\subsection{Classifiers}
+So far, the network compresses the images without any interpretability of the latent space, i.e. we do not know what each neuron does. To do so, we can attempt to assign meaning to each neuron by imposing a classification constraint. If the 784 pixel image is compressed to 8 neurons, we can add 10 neurons to the latent layer, and demand that these output the class of the image it belongs to. What we hope to achieve is that once we have the decoder, that takes \(8 + 10\) inputs, we can specify that we want to generate an image of the digit 3, and the initial 8 neurons will be filled with quantities that change the "handwriting" style.
+
+This will be the first approach to letting a neural network "learn" the latent space that carries meaning, laying foundation to more complex constraints like Sindy or Sparcity. 
+
+One layer of challenge we face is that we do not have control yet over the layer that will become the latent space. We can at every batch, scan each layer to determine the possible latent layer, and reserve the first 10 nodes for classification. 
+
 
 \section{References}
 \begin{itemize}

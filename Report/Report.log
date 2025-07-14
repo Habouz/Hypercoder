@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (MiKTeX 24.1) (preloaded format=pdflatex 2025.2.8)  14 JUL 2025 12:17
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (MiKTeX 24.1) (preloaded format=pdflatex 2025.2.8)  14 JUL 2025 21:08
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -383,64 +383,53 @@ Package hyperref Info: bookmark level for unknown lstlisting defaults to 0 on in
 LaTeX Font Info:    Font shape `OT1/cmtt/bx/n' in size <10> not available
 (Font)              Font shape `OT1/cmtt/m/n' tried instead on input line 90.
  [4] [5] [6]
-<recon_example.png, id=223, 578.16pt x 289.08pt>
+<recon_example.png, id=231, 578.16pt x 289.08pt>
 File: recon_example.png Graphic file (type png)
 <use recon_example.png>
 Package pdftex.def Info: recon_example.png  used on input line 254.
 (pdftex.def)             Requested size: 187.89914pt x 93.94987pt.
  [7 <./recon_example.png>]
-<latent_analyse.png, id=241, 1387.584pt x 704.6325pt>
+<latent_analyse.png, id=249, 1387.584pt x 704.6325pt>
 File: latent_analyse.png Graphic file (type png)
 <use latent_analyse.png>
 Package pdftex.def Info: latent_analyse.png  used on input line 272.
 (pdftex.def)             Requested size: 469.75502pt x 238.55046pt.
-<recon_example_path.png, id=242, 578.16pt x 289.08pt>
+<recon_example_path.png, id=250, 578.16pt x 289.08pt>
 File: recon_example_path.png Graphic file (type png)
 <use recon_example_path.png>
 Package pdftex.def Info: recon_example_path.png  used on input line 296.
 (pdftex.def)             Requested size: 187.89914pt x 93.94987pt.
-
-
-LaTeX Warning: `!h' float specifier changed to `!ht'.
-
-<recon_example_path_failed.png, id=243, 578.16pt x 289.08pt>
+<recon_example_path_failed.png, id=251, 578.16pt x 289.08pt>
 File: recon_example_path_failed.png Graphic file (type png)
 <use recon_example_path_failed.png>
 Package pdftex.def Info: recon_example_path_failed.png  used on input line 304.
 (pdftex.def)             Requested size: 187.89914pt x 93.94987pt.
-
-LaTeX Warning: `!h' float specifier changed to `!ht'.
-
-[8 <./latent_analyse.png>]
-<latent_analyse_path.png, id=250, 462.528pt x 346.896pt>
+ [8 <./latent_analyse.png>]
+<latent_analyse_path.png, id=258, 462.528pt x 346.896pt>
 File: latent_analyse_path.png Graphic file (type png)
 <use latent_analyse_path.png>
 Package pdftex.def Info: latent_analyse_path.png  used on input line 312.
 (pdftex.def)             Requested size: 469.75502pt x 352.33655pt.
-
-
-LaTeX Warning: `!h' float specifier changed to `!ht'.
-
-[9 <./recon_example_path.png> <./recon_example_path_failed.png>] [10 <./latent_analyse_path.png>] (Report.aux)
+ [9 <./recon_example_path.png> <./recon_example_path_failed.png>] [10 <./latent_analyse_path.png>] (Report.aux)
  ***********
 LaTeX2e <2023-11-01> patch level 1
 L3 programming layer <2024-01-04>
  ***********
 Package rerunfilecheck Info: File `Report.out' has not changed.
-(rerunfilecheck)             Checksum: 3264AEF4AACE7DCB3D8791C49026A6FC;3292.
+(rerunfilecheck)             Checksum: EC5643FBD0F9F4032D4865762AB47206;3656.
  ) 
 Here is how much of TeX's memory you used:
- 12646 strings out of 474486
- 190184 string characters out of 5744228
+ 12650 strings out of 474486
+ 190234 string characters out of 5744228
  2304542 words of memory out of 5000000
- 34644 multiletter control sequences out of 15000+600000
+ 34646 multiletter control sequences out of 15000+600000
  568282 words of font info for 76 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  75i,6n,79p,937b,1368s stack positions out of 10000i,1000n,20000p,200000b,200000s
  <C:\Users\Work\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\tcrm1200.pk><C:/Users/Work/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmbx10.pfb><C:/Users/Work/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmbx12.pfb><C:/Users/Work/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmex10.pfb><C:/Users/Work/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmitt10.pfb><C:/Users/Work/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi12.pfb><C:/Users/Work/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi8.pfb><C:/Users/Work/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Users/Work/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr12.pfb><C:/Users/Work/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr17.pfb><C:/Users/Work/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr8.pfb><C:/Users/Work/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Users/Work/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmtt10.pfb><C:/Users/Work/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmtt12.pfb>
-Output written on Report.pdf (10 pages, 438735 bytes).
+Output written on Report.pdf (10 pages, 440755 bytes).
 PDF statistics:
- 357 PDF objects out of 1000 (max. 8388607)
- 146 named destinations out of 1000 (max. 500000)
- 186 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 365 PDF objects out of 1000 (max. 8388607)
+ 148 named destinations out of 1000 (max. 500000)
+ 202 words of extra memory for PDF output out of 10000 (max. 10000000)
 
