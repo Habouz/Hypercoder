@@ -4,13 +4,12 @@ import torch.optim as optim
 from torchvision import datasets, transforms
 import matplotlib.pyplot as plt
 import numpy as np
-from distance_distribution import path_entropy_parallel
 from layer_finder import find_layer_with_least_effective
 from entropic_losses import entropic_loss, cumm_entropic_loss
 
 np.set_printoptions(linewidth=200)
 
-# === 1. Data Loading (MNIST) ===
+# === 1. Data Loading (CIFAR10) ===
 transform = transforms.Compose([transforms.ToTensor()])
 cifar10 = datasets.CIFAR10(root='./data_cifar10', train=True, download=True, transform=transform)
 loader = torch.utils.data.DataLoader(cifar10, batch_size=256, shuffle=True)
