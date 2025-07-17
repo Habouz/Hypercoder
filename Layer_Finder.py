@@ -37,8 +37,7 @@ def find_layer_with_least_effective(layers, threshold=-1):
 
     Parameters
     ----------
-    layers : list of tupl
-
+    layers : list of tuple
         Each element is (W, b) for a layer, where W is the weight matrix
         and b is the bias vector (both numpy arrays).
     threshold : float
