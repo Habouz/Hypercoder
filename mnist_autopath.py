@@ -4,9 +4,8 @@ import torch.optim as optim
 from torchvision import datasets, transforms
 import matplotlib.pyplot as plt
 import numpy as np
-from Distance_Distribution import path_entropy_parallel
+from distance_distribution import path_entropy_parallel
 from Layer_Finder import find_layer_with_least_effective
-from Entropic_Loss import entropic_loss, cumm_entropic_loss
 
 np.set_printoptions(linewidth=200)
 
@@ -120,5 +119,5 @@ if __name__ == "__main__":
         plt.show()
 
     # === Save ===
-    torch.save(encoder, "encoder_full.pth")
-    torch.save(decoder, "decoder_full.pth")
+    torch.save(encoder, "mnist_path_encoder_full.pth")
+    torch.save(decoder, "mnist_path_decoder_full.pth")
