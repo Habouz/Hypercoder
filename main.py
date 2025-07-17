@@ -9,6 +9,8 @@ from Layer_Finder import find_layer_with_least_effective
 from Entropic_Loss import entropic_loss, cumm_entropic_loss
 
 np.set_printoptions(linewidth=200)
+classifier = torch.load('mnist_classifier_entire.pth')
+
 
 # === 1. Data Loading (MNIST) ===
 transform = transforms.Compose([transforms.ToTensor()])
@@ -43,6 +45,16 @@ class Autoencoder(nn.Module):
         return nn.Sequential(*list(self.autoencoder)[:7])(x)
 
 
+def classifier_loss(x, y):
+    
+    logits_x = classifier(x)
+    logits_x = nn.functional.softmax(logits_x, dim=1)
+
+    logits_y = classifier(y)
+    logits_y = nn.functional.softmax(logits_y, dim=1)
+    
+    return nn.functional.kl_div(logits_y.log(), logits_x, reduction='batchmean')
+
 
 if __name__ == "__main__":
     extended_latent_dim = 32
@@ -53,11 +65,15 @@ if __name__ == "__main__":
     paths = None
     criterion_term = 1.0
     entropy_term = 0.5
-    cross_entropy_term = 1.0
+    cross_entropy_term = 0.0
+    turnon = 0.0
 
     # === 3. Training ===
-    for epoch in range(50):
+    for epoch in range(15):
         doprint = True
+        if epoch == 8: 
+            turnon = 1.0
+            print(f"Turned on classifier loss at epoch {epoch+1}")
         for batch, labels in loader:
             optimizer.zero_grad()
 
@@ -69,7 +85,6 @@ if __name__ == "__main__":
 
             
             # Compute Entropy
-
             W_l = linear_layers[2].weight
             W_r = linear_layers[3].weight
             B = linear_layers[2].bias
@@ -79,14 +94,9 @@ if __name__ == "__main__":
             classification = model.half_forward(batch)[:,:10]
             classification_loss = cross_entropy(classification, labels) #TODO: Not making the latent space predictible yet. Needs more work.
 
-            # Scarcity Loss
-            l_1 = torch.tensor(0.0)
-            for weight in weight_list:
-                l_1 += torch.norm(weight, p=1)
-
             # Reconstruction Loss
             recon = model(batch)
-            criterion_loss = criterion(recon, batch)
+            criterion_loss = turnon*classifier_loss(batch, recon) + criterion(recon, batch) # Reconstruction loss + classifier loss
             loss = criterion_term * criterion_loss + entropy_term * eloss + cross_entropy_term * classification_loss # Entire Loss Function
             loss.backward()
             optimizer.step()

@@ -24,7 +24,7 @@ mnist = datasets.MNIST(root='./data', train=True, download=True, transform=trans
 loader = torch.utils.data.DataLoader(mnist, batch_size=256, shuffle=True)
 
 for img_batch, label_batch in loader:
-    idx = (label_batch == 0).nonzero(as_tuple=True)[0]
+    idx = (label_batch == 5).nonzero(as_tuple=True)[0]
     if len(idx) > 0:
         img = img_batch[idx[0]].unsqueeze(0)
         break
